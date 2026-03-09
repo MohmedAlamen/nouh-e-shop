@@ -1,17 +1,27 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Moon, Sun, Globe, Search } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ShoppingCart, Menu, X, Moon, Sun, Globe, User, LogOut } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 const Header = () => {
   const { language, setLanguage, t } = useLanguage();
   const { totalItems } = useCart();
   const { theme, toggleTheme } = useTheme();
+  const { user, signOut } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success(language === 'ar' ? 'تم تسجيل الخروج' : 'Signed out');
+    navigate('/');
+  };
 
   const navLinks = [
     { path: '/', label: t('nav.home') },
