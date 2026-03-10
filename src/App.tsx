@@ -44,6 +44,7 @@ const App = () => (
                       <Route path="/auth" element={<Auth />} />
                       <Route path="/reset-password" element={<ResetPassword />} />
                       <Route path="/profile" element={<Profile />} />
+                      <Route path="/wishlist" element={<Wishlist />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </div>
