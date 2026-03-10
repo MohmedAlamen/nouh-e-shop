@@ -83,13 +83,22 @@ const Header = () => {
               {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
             {user ? (
-              <button
-                onClick={handleSignOut}
-                className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-                aria-label="Sign out"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1">
+                <Link
+                  to="/profile"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Profile"
+                >
+                  <User className="w-5 h-5" />
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Sign out"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
             ) : (
               <Link
                 to="/auth"

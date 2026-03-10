@@ -40,6 +40,7 @@ const App = () => (
                       <Route path="/cart" element={<Cart />} />
                       <Route path="/auth" element={<Auth />} />
                       <Route path="/reset-password" element={<ResetPassword />} />
+                      <Route path="/profile" element={<Profile />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </div>
