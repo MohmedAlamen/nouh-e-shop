@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { WishlistProvider } from "@/contexts/WishlistContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -16,6 +17,7 @@ import Cart from "./pages/Cart";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import Profile from "./pages/Profile";
+import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,8 +27,9 @@ const App = () => (
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
-          <CartProvider>
-            <TooltipProvider>
+          <WishlistProvider>
+            <CartProvider>
+              <TooltipProvider>
               <Toaster />
               <Sonner />
               <BrowserRouter>
@@ -41,14 +44,16 @@ const App = () => (
                       <Route path="/auth" element={<Auth />} />
                       <Route path="/reset-password" element={<ResetPassword />} />
                       <Route path="/profile" element={<Profile />} />
+                      <Route path="/wishlist" element={<Wishlist />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </div>
                   <Footer />
                 </div>
               </BrowserRouter>
-            </TooltipProvider>
-          </CartProvider>
+              </TooltipProvider>
+            </CartProvider>
+          </WishlistProvider>
         </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>

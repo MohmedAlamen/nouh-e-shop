@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Moon, Sun, Globe, User, LogOut } from 'lucide-react';
+import { ShoppingCart, Menu, X, Moon, Sun, Globe, User, LogOut, Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 
@@ -13,6 +14,7 @@ const Header = () => {
   const { totalItems } = useCart();
   const { theme, toggleTheme } = useTheme();
   const { user, signOut } = useAuth();
+  const { wishlist } = useWishlist();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -84,6 +86,18 @@ const Header = () => {
             </button>
             {user ? (
               <div className="flex items-center gap-1">
+                <Link
+                  to="/wishlist"
+                  className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Wishlist"
+                >
+                  <Heart className="w-5 h-5" />
+                  {wishlist.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] flex items-center justify-center font-bold">
+                      {wishlist.length}
+                    </span>
+                  )}
+                </Link>
                 <Link
                   to="/profile"
                   className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
