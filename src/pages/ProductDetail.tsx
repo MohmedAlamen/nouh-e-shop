@@ -1,10 +1,13 @@
 import { useParams, Link } from 'react-router-dom';
-import { ShoppingCart, Star, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ShoppingCart, Star, ArrowLeft, ArrowRight, Check, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useWishlist } from '@/contexts/WishlistContext';
 import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
+import { toast } from 'sonner';
 
 const ProductDetail = () => {
   const { id } = useParams();
