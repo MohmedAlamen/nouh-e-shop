@@ -10,6 +10,8 @@ const ProductDetail = () => {
   const { id } = useParams();
   const { language, t } = useLanguage();
   const { addToCart } = useCart();
+  const { user } = useAuth();
+  const { isInWishlist, toggleWishlist } = useWishlist();
   const product = products.find(p => p.id === id);
   const BackArrow = language === 'ar' ? ArrowRight : ArrowLeft;
 
