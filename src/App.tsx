@@ -51,8 +51,9 @@ const App = () => (
                   <Footer />
                 </div>
               </BrowserRouter>
-            </TooltipProvider>
-          </CartProvider>
+              </TooltipProvider>
+            </CartProvider>
+          </WishlistProvider>
         </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>

@@ -103,14 +103,34 @@ const ProductDetail = () => {
             </div>
           )}
 
-          {/* Add to Cart */}
-          <button
-            onClick={() => addToCart(product)}
-            className="mt-auto flex items-center justify-center gap-2 w-full py-3.5 rounded-xl gradient-accent text-accent-foreground font-bold text-lg hover:opacity-90 transition-opacity shadow-hero"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            {t('product.addToCart')}
-          </button>
+          {/* Actions */}
+          <div className="mt-auto flex gap-3">
+            <button
+              onClick={() => addToCart(product)}
+              className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl gradient-accent text-accent-foreground font-bold text-lg hover:opacity-90 transition-opacity shadow-hero"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              {t('product.addToCart')}
+            </button>
+            <button
+              onClick={async () => {
+                if (!user) {
+                  toast.error(language === 'ar' ? 'سجل الدخول أولاً' : 'Please sign in first');
+                  return;
+                }
+                const liked = isInWishlist(product.id);
+                await toggleWishlist(product.id);
+                toast.success(liked
+                  ? (language === 'ar' ? 'تمت الإزالة من المفضلة' : 'Removed from wishlist')
+                  : (language === 'ar' ? 'تمت الإضافة إلى المفضلة' : 'Added to wishlist')
+                );
+              }}
+              className="p-3.5 rounded-xl border border-border bg-card hover:bg-secondary transition-colors"
+              aria-label="Toggle wishlist"
+            >
+              <Heart className={`w-6 h-6 ${isInWishlist(product.id) ? 'fill-destructive text-destructive' : 'text-muted-foreground'}`} />
+            </button>
+          </div>
         </motion.div>
       </div>
 

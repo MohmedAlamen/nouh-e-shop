@@ -87,6 +87,18 @@ const Header = () => {
             {user ? (
               <div className="flex items-center gap-1">
                 <Link
+                  to="/wishlist"
+                  className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Wishlist"
+                >
+                  <Heart className="w-5 h-5" />
+                  {wishlist.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] flex items-center justify-center font-bold">
+                      {wishlist.length}
+                    </span>
+                  )}
+                </Link>
+                <Link
                   to="/profile"
                   className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                   aria-label="Profile"
