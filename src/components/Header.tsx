@@ -14,6 +14,7 @@ const Header = () => {
   const { totalItems } = useCart();
   const { theme, toggleTheme } = useTheme();
   const { user, signOut } = useAuth();
+  const { wishlist } = useWishlist();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
