@@ -7,6 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useWishlist } from '@/contexts/WishlistContext';
 import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
+import ReviewSection from '@/components/ReviewSection';
 import { toast } from 'sonner';
 
 const ProductDetail = () => {
