@@ -108,9 +108,12 @@ const Cart = () => {
               <span className="font-bold text-foreground text-lg">{t('cart.total')}</span>
               <span className="font-bold text-foreground text-2xl">{totalPrice} {t('currency')}</span>
             </div>
-            <button className="w-full py-3.5 rounded-xl gradient-accent text-accent-foreground font-bold text-lg hover:opacity-90 transition-opacity">
+            <Link
+              to="/checkout"
+              className="block w-full py-3.5 rounded-xl gradient-accent text-accent-foreground font-bold text-lg hover:opacity-90 transition-opacity text-center"
+            >
               {t('cart.checkout')}
-            </button>
+            </Link>
             <Link
               to="/products"
               className="block text-center text-sm text-primary mt-4 hover:underline"
