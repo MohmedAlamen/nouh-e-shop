@@ -42,7 +42,7 @@ const UserDashboard = () => {
 
   const cards = [
     { label: isAr ? 'طلباتي' : 'My Orders', value: stats.orders, icon: ShoppingBag, link: '/orders', color: 'text-blue-500 bg-blue-500/10' },
-    { label: isAr ? 'المفضلة' : 'Wishlist', value: wishlistItems.length, icon: Heart, link: '/wishlist', color: 'text-red-500 bg-red-500/10' },
+    { label: isAr ? 'المفضلة' : 'Wishlist', value: wishlist.length, icon: Heart, link: '/wishlist', color: 'text-red-500 bg-red-500/10' },
     { label: isAr ? 'تقييماتي' : 'My Reviews', value: stats.reviews, icon: Star, link: '/products', color: 'text-amber-500 bg-amber-500/10' },
     { label: isAr ? 'إجمالي الإنفاق' : 'Total Spent', value: `${stats.totalSpent} ${t('currency')}`, icon: Package, link: '/orders', color: 'text-green-500 bg-green-500/10' },
   ];
