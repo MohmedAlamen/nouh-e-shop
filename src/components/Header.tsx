@@ -99,6 +99,13 @@ const Header = () => {
                   )}
                 </Link>
                 <Link
+                  to="/dashboard"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Dashboard"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
+                </Link>
+                <Link
                   to="/profile"
                   className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                   aria-label="Profile"
