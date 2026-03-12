@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Menu, X, Moon, Sun, Globe, User, LogOut, Heart } from 'lucide-react';
+import { ShoppingCart, Menu, X, Moon, Sun, Globe, User, LogOut, Heart, LayoutDashboard } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -97,6 +97,13 @@ const Header = () => {
                       {wishlist.length}
                     </span>
                   )}
+                </Link>
+                <Link
+                  to="/dashboard"
+                  className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  aria-label="Dashboard"
+                >
+                  <LayoutDashboard className="w-5 h-5" />
                 </Link>
                 <Link
                   to="/profile"
