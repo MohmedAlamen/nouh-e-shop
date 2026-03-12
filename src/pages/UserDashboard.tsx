@@ -12,7 +12,7 @@ const UserDashboard = () => {
   const { user } = useAuth();
   const { language, t } = useLanguage();
   const navigate = useNavigate();
-  const { wishlistItems } = useWishlist();
+  const { wishlist } = useWishlist();
   const { isAdmin } = useAdminCheck();
   const isAr = language === 'ar';
 
