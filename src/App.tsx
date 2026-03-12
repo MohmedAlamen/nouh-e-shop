@@ -20,6 +20,8 @@ import Profile from "./pages/Profile";
 import Wishlist from "./pages/Wishlist";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+import UserDashboard from "./pages/UserDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
