@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingBag, Users, Menu, X, ArrowRight, ArrowLeft } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingBag, Users, Menu, X, ArrowRight, ArrowLeft, Bell } from 'lucide-react';
 import { useAdminCheck } from '@/hooks/useAdminCheck';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 import AdminStats from '@/components/admin/AdminStats';
 import AdminOrders from '@/components/admin/AdminOrders';
 import AdminProducts from '@/components/admin/AdminProducts';
@@ -21,6 +23,8 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('stats');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [newOrderCount, setNewOrderCount] = useState(0);
+  const ordersRefreshRef = useRef<(() => void) | null>(null);
   const isAr = language === 'ar';
   const BackArrow = isAr ? ArrowRight : ArrowLeft;
 
@@ -28,12 +32,39 @@ const AdminDashboard = () => {
     if (!loading && !isAdmin) navigate('/');
   }, [loading, isAdmin]);
 
+  // Realtime subscription for new orders
+  useEffect(() => {
+    if (!isAdmin) return;
+    const channel = supabase
+      .channel('admin-orders-realtime')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'orders' },
+        (payload) => {
+          const order = payload.new as any;
+          toast(isAr ? `🔔 طلب جديد من ${order.shipping_name}` : `🔔 New order from ${order.shipping_name}`, {
+            description: `${order.total} ${isAr ? 'ر.س' : 'SAR'}`,
+            action: {
+              label: isAr ? 'عرض' : 'View',
+              onClick: () => { setActiveTab('orders'); setNewOrderCount(0); },
+            },
+          });
+          if (activeTab !== 'orders') {
+            setNewOrderCount(prev => prev + 1);
+          }
+          ordersRefreshRef.current?.();
+        }
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin, isAr, activeTab]);
+
   if (loading) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
   if (!isAdmin) return null;
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'orders': return <AdminOrders />;
+      case 'orders': return <AdminOrders onRefreshRef={(fn) => { ordersRefreshRef.current = fn; }} />;
       case 'products': return <AdminProducts />;
       case 'users': return <AdminUsers />;
       default: return <AdminStats />;
@@ -60,11 +91,16 @@ const AdminDashboard = () => {
             return (
               <button
                 key={tab.id}
-                onClick={() => { setActiveTab(tab.id); setSidebarOpen(false); }}
+                onClick={() => { setActiveTab(tab.id); setSidebarOpen(false); if (tab.id === 'orders') setNewOrderCount(0); }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-secondary hover:text-foreground'}`}
               >
                 <Icon className="w-5 h-5" />
                 {isAr ? tab.ar : tab.en}
+                {tab.id === 'orders' && newOrderCount > 0 && (
+                  <span className="ms-auto bg-destructive text-destructive-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {newOrderCount}
+                  </span>
+                )}
               </button>
             );
           })}

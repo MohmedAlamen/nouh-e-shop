@@ -13,7 +13,11 @@ const statusLabels: Record<string, { ar: string; en: string }> = {
   delivered: { ar: 'تم التوصيل', en: 'Delivered' },
 };
 
-const AdminOrders = () => {
+interface AdminOrdersProps {
+  onRefreshRef?: (fn: () => void) => void;
+}
+
+const AdminOrders = ({ onRefreshRef }: AdminOrdersProps) => {
   const { language, t } = useLanguage();
   const isAr = language === 'ar';
   const [orders, setOrders] = useState<any[]>([]);
@@ -21,6 +25,10 @@ const AdminOrders = () => {
   const [filterStatus, setFilterStatus] = useState<string>('all');
 
   useEffect(() => { fetchOrders(); }, []);
+
+  useEffect(() => {
+    if (onRefreshRef) onRefreshRef(fetchOrders);
+  }, [onRefreshRef]);
 
   const fetchOrders = async () => {
     setLoading(true);
