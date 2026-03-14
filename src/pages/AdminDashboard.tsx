@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingBag, Users, Menu, X, ArrowRight, ArrowLeft } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingBag, Users, Menu, X, ArrowRight, ArrowLeft, Bell } from 'lucide-react';
 import { useAdminCheck } from '@/hooks/useAdminCheck';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 import AdminStats from '@/components/admin/AdminStats';
 import AdminOrders from '@/components/admin/AdminOrders';
 import AdminProducts from '@/components/admin/AdminProducts';
