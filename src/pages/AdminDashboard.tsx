@@ -23,12 +23,41 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('stats');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [newOrderCount, setNewOrderCount] = useState(0);
+  const ordersRefreshRef = useRef<(() => void) | null>(null);
   const isAr = language === 'ar';
   const BackArrow = isAr ? ArrowRight : ArrowLeft;
 
   useEffect(() => {
     if (!loading && !isAdmin) navigate('/');
   }, [loading, isAdmin]);
+
+  // Realtime subscription for new orders
+  useEffect(() => {
+    if (!isAdmin) return;
+    const channel = supabase
+      .channel('admin-orders-realtime')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'orders' },
+        (payload) => {
+          const order = payload.new as any;
+          toast(isAr ? `🔔 طلب جديد من ${order.shipping_name}` : `🔔 New order from ${order.shipping_name}`, {
+            description: `${order.total} ${isAr ? 'ر.س' : 'SAR'}`,
+            action: {
+              label: isAr ? 'عرض' : 'View',
+              onClick: () => { setActiveTab('orders'); setNewOrderCount(0); },
+            },
+          });
+          if (activeTab !== 'orders') {
+            setNewOrderCount(prev => prev + 1);
+          }
+          ordersRefreshRef.current?.();
+        }
+      )
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [isAdmin, isAr, activeTab]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Loading...</div>;
   if (!isAdmin) return null;
