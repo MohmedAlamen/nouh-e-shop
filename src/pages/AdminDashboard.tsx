@@ -91,11 +91,16 @@ const AdminDashboard = () => {
             return (
               <button
                 key={tab.id}
-                onClick={() => { setActiveTab(tab.id); setSidebarOpen(false); }}
+                onClick={() => { setActiveTab(tab.id); setSidebarOpen(false); if (tab.id === 'orders') setNewOrderCount(0); }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-secondary hover:text-foreground'}`}
               >
                 <Icon className="w-5 h-5" />
                 {isAr ? tab.ar : tab.en}
+                {tab.id === 'orders' && newOrderCount > 0 && (
+                  <span className="ms-auto bg-destructive text-destructive-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {newOrderCount}
+                  </span>
+                )}
               </button>
             );
           })}
