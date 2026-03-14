@@ -64,7 +64,7 @@ const AdminDashboard = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'orders': return <AdminOrders />;
+      case 'orders': return <AdminOrders onRefreshRef={(fn) => { ordersRefreshRef.current = fn; }} />;
       case 'products': return <AdminProducts />;
       case 'users': return <AdminUsers />;
       default: return <AdminStats />;
