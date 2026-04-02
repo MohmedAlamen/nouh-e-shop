@@ -58,6 +58,7 @@ const App = () => (
                     </Routes>
                   </div>
                   <Footer />
+                  <ChatWidget />
                 </div>
               </BrowserRouter>
               </TooltipProvider>
