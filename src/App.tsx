@@ -23,6 +23,7 @@ import Orders from "./pages/Orders";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import ChatWidget from "./components/ChatWidget";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => (
                     </Routes>
                   </div>
                   <Footer />
+                  <ChatWidget />
                 </div>
               </BrowserRouter>
               </TooltipProvider>
