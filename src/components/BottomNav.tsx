@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 const BottomNav = () => {
   const location = useLocation();
-  const { t } = useLanguage();
+  const { language } = useLanguage();
   const { totalItems } = useCart();
   const { wishlist } = useWishlist();
   const { user } = useAuth();
