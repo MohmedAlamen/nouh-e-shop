@@ -24,6 +24,7 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import ChatWidget from "./components/ChatWidget";
+import BottomNav from "./components/BottomNav";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,7 @@ const App = () => (
               <BrowserRouter>
                 <div className="min-h-screen flex flex-col bg-background">
                   <Header />
-                  <div className="flex-1">
+                  <div className="flex-1 pb-16 md:pb-0">
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/products" element={<Products />} />
@@ -58,6 +59,7 @@ const App = () => (
                     </Routes>
                   </div>
                   <Footer />
+                  <BottomNav />
                   <ChatWidget />
                 </div>
               </BrowserRouter>
