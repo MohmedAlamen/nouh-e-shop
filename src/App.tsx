@@ -41,7 +41,7 @@ const App = () => (
               <BrowserRouter>
                 <div className="min-h-screen flex flex-col bg-background">
                   <Header />
-                  <div className="flex-1">
+                  <div className="flex-1 pb-16 md:pb-0">
                     <Routes>
                       <Route path="/" element={<Index />} />
                       <Route path="/products" element={<Products />} />
