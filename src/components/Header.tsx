@@ -88,7 +88,7 @@ const Header = () => {
               <div className="flex items-center gap-1">
                 <Link
                   to="/wishlist"
-                  className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+                  className="hidden md:relative md:inline-flex p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                   aria-label="Wishlist"
                 >
                   <Heart className="w-5 h-5" />
@@ -130,7 +130,7 @@ const Header = () => {
             )}
             <Link
               to="/cart"
-              className="relative p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              className="hidden md:relative md:inline-flex p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
               <ShoppingCart className="w-5 h-5" />
               {totalItems > 0 && (
