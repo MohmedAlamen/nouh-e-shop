@@ -14,11 +14,11 @@ const BottomNav = () => {
   const { user } = useAuth();
 
   const navItems = [
-    { path: '/', icon: Home, label: t('nav.home') },
-    { path: '/products', icon: Search, label: t('nav.products') },
-    { path: '/wishlist', icon: Heart, label: t('nav.wishlist') || 'المفضلة' },
-    { path: '/cart', icon: ShoppingCart, label: t('nav.cart') || 'السلة' },
-    { path: user ? '/profile' : '/auth', icon: User, label: t('nav.profile') || 'حسابي' },
+    { path: '/', icon: Home, label: language === 'ar' ? 'الرئيسية' : 'Home' },
+    { path: '/products', icon: Search, label: language === 'ar' ? 'المنتجات' : 'Products' },
+    { path: '/wishlist', icon: Heart, label: language === 'ar' ? 'المفضلة' : 'Wishlist' },
+    { path: '/cart', icon: ShoppingCart, label: language === 'ar' ? 'السلة' : 'Cart' },
+    { path: user ? '/profile' : '/auth', icon: User, label: language === 'ar' ? 'حسابي' : 'Account' },
   ];
 
   const isActive = (path: string) => {
