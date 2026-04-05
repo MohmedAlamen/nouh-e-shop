@@ -24,6 +24,7 @@ import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import ChatWidget from "./components/ChatWidget";
+import BottomNav from "./components/BottomNav";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
                     </Routes>
                   </div>
                   <Footer />
+                  <BottomNav />
                   <ChatWidget />
                 </div>
               </BrowserRouter>
