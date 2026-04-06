@@ -106,8 +106,8 @@ const Orders = () => {
                 className="bg-card border border-border rounded-2xl overflow-hidden"
               >
                 {/* Header */}
-                <button
-                  onClick={() => setExpandedId(isExpanded ? null : order.id)}
+                <Link
+                  to={`/order/${order.id}`}
                   className="w-full flex items-center justify-between p-5 text-start hover:bg-secondary/30 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
@@ -129,7 +129,7 @@ const Orders = () => {
                     <span className="text-lg font-bold text-foreground">{order.total}</span>
                     <span className="text-sm text-muted-foreground ms-1">{t('currency')}</span>
                   </div>
-                </button>
+                </Link>
 
                 {/* Expanded Details */}
                 {isExpanded && (

@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Wishlist from "./pages/Wishlist";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+import OrderDetail from "./pages/OrderDetail";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -53,6 +54,7 @@ const App = () => (
                       <Route path="/wishlist" element={<Wishlist />} />
                       <Route path="/checkout" element={<Checkout />} />
                       <Route path="/orders" element={<Orders />} />
+                      <Route path="/order/:id" element={<OrderDetail />} />
                       <Route path="/dashboard" element={<UserDashboard />} />
                       <Route path="/admin" element={<AdminDashboard />} />
                       <Route path="*" element={<NotFound />} />
