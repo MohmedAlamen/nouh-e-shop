@@ -129,7 +129,7 @@ const Orders = () => {
                     <span className="text-lg font-bold text-foreground">{order.total}</span>
                     <span className="text-sm text-muted-foreground ms-1">{t('currency')}</span>
                   </div>
-                </button>
+                </Link>
 
                 {/* Expanded Details */}
                 {isExpanded && (
