@@ -106,8 +106,8 @@ const Orders = () => {
                 className="bg-card border border-border rounded-2xl overflow-hidden"
               >
                 {/* Header */}
-                <button
-                  onClick={() => setExpandedId(isExpanded ? null : order.id)}
+                <Link
+                  to={`/order/${order.id}`}
                   className="w-full flex items-center justify-between p-5 text-start hover:bg-secondary/30 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
